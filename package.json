@@ -16,7 +16,10 @@
     "url": "https://github.com/xzfd1010/udactiy-blockchain-nanodegree/issues"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "crypto-js": "^3.1.9-1",
+    "express": "^4.16.3",
+    "hapi": "^17.8.1",
     "level": "^4.0.0"
   },
   "homepage": "https://github.com/xzfd1010/udactiy-blockchain-nanodegree#readme"
