@@ -45,7 +45,7 @@ class Blockchain {
     // Add new block
     async addBlock (newBlock) {
         // Add your code here
-        let previousBlockHeight = parseInt(await this.getBlockHeight())
+        const previousBlockHeight = parseInt(await this.getBlockHeight())
         newBlock.height = previousBlockHeight + 1
         newBlock.time = new Date().getTime().toString().slice(0, -3)
         if (newBlock.height > 0) { // 必达条件
@@ -94,17 +94,18 @@ class Blockchain {
         let errorLog = []
         let blockChainHeight = await this.getBlockHeight()
 
-        for (let i = 0; i < blockChainHeight; i++) {
+        for (let i = 0; i <= blockChainHeight; i++) {
             // validate a single block
             if (!this.validateBlock(i)) errorLog.push(i)
 
             // compare blocks hash link
-            let blockHash = this.getBlock(i).hash
-            let previousHash = this.getBlock(i + 1).previousBlockHash
-            if (blockHash !== previousHash) {
-                errorLog.push(i)
+            if (i < blockChainHeight) {
+                let blockHash = this.getBlock(i).hash
+                let previousHash = this.getBlock(i + 1).previousBlockHash
+                if (blockHash !== previousHash) {
+                    errorLog.push(i)
+                }
             }
-
         }
 
         if (errorLog.length > 0) {
