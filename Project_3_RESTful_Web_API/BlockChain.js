@@ -20,7 +20,7 @@ class Blockchain {
     generateGenesisBlock () {
         // Add your code here
         this.getBlockHeight().then(height => {
-            if (height === -1) this.addBlock(new Block('Genesis Block')).then(() => {console.log('Genesis block stored')})
+            if (height === -1) this.addBlock(new Block('First block in the chain - Genesis block')).then(() => {console.log('Genesis block stored')})
         })
     }
 
@@ -48,7 +48,7 @@ class Blockchain {
         const previousBlockHeight = parseInt(await this.getBlockHeight())
         newBlock.height = previousBlockHeight + 1
         newBlock.time = new Date().getTime().toString().slice(0, -3)
-        if (newBlock.height > 0) { // 必达条件
+        if (newBlock.height > 0) {
             let previousBlock = await this.getBlock(previousBlockHeight)
             newBlock.previousBlockHash = previousBlock.hash
         }

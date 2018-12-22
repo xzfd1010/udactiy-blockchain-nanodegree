@@ -36,13 +36,16 @@ class BlockController {
     postNewBlock () {
         this.app.post('/block', (req, res) => {
             // Add your code here
+            if (this.blocks.length === 0) {
+                let block = new BlockClass.Block('First block in the chain - Genesis block')
+            }
             if (req.body.content) {
                 let block = new BlockClass.Block(req.body.content)
                 block.height = this.blocks.length
                 block.hash = SHA256(JSON.stringify(block)).toString()
                 this.blocks.push(block)
                 res.json(block)
-            }else{
+            } else {
                 res.send('please add content in post body')
             }
         })
